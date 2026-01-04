@@ -43,3 +43,23 @@ async function initJar() {
 }
 
 document.addEventListener('DOMContentLoaded', initJar);
+
+
+
+
+// Function to handle the first interaction
+function startAudio() {
+    const audio = document.getElementById('bg-music');
+    
+    // Attempt to play the audio
+    audio.play().then(() => {
+        console.log("Music started successfully!");
+        // Once it plays, we remove the event listener so it doesn't trigger again
+        window.removeEventListener('click', startAudio);
+    }).catch(error => {
+        console.log("Autoplay prevented by browser, waiting for interaction.", error);
+    });
+}
+
+// Wait for a click anywhere on the page
+window.addEventListener('click', startAudio);
